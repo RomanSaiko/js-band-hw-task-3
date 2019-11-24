@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>js-band-hw-task-3</title>
+</head>
+<body>
+
+<div class="container">
+  <div class="flex-wrapper">
+    <div class="flex-item">
+      <div class="form-wrapper">
+        <h3>Trucks</h3>
+        <form id="create-truck">
+          <div class="form-input">
+            <label>id</label>
+            <input required type="text" id="truck-id">
+          </div>
+          <div class="form-input">
+            <label>Model</label>
+            <input required type="text" id="truck-model">
+          </div>
+          <div class="form-input">
+            <label>License plate</label>
+            <input required type="text" id="license-plate">
+          </div>
+          <div class="form-input">
+            <label>Produced year</label>
+            <input required type="number" min="1900" id="truck-produced-year">
+          </div>
+          <div class="form-input">
+            <label>Capacity </label>
+            <input required type="number" id="truck-capacity">
+          </div>
+          <div class="form-input">
+            <label>Average speed (in km)</label>
+            <input required type="number" id="truck-average-speed">
+          </div>
+          <div class="form-input">
+            <label>Type of gas</label>
+            <input required type="text" id="gas-type">
+          </div>
+          <div class="form-input">
+            <button type="submit">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="flex-item">
+      <div class="form-wrapper">
+        <h3>Ships/Argosy</h3>
+        <form id="create-ship">
+          <div class="form-input">
+            <label>id</label>
+            <input required type="text" id="ship-id">
+          </div>
+          <div class="form-input">
+            <label>Model</label>
+            <input required type="text" id="ship-model">
+          </div>
+          <div class="form-input">
+            <label>Serial number/Name</label>
+            <input required type="text" id="ship-name">
+          </div>
+          <div class="form-input">
+            <label>Produced year</label>
+            <input required type="number" id="ship-produced-year">
+          </div>
+          <div class="form-input">
+            <label>Capacity </label>
+            <input required type="number" id="ship-capacity">
+          </div>
+          <div class="form-input">
+            <label>Average speed (in nm)</label>
+            <input required type="number" id="ship-average-speed">
+          </div>
+          <div class="form-input">
+            <label>Count of team</label>
+            <input required type="number" id="team-count">
+          </div>
+          <div class="form-input">
+            <button type="submit">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="flex-item">
+      <div class="form-wrapper">
+        <h3>Cost of delivery</h3>
+        <form id="create-cost">
+          <div class="form-input">
+            <label>Transport Model</label>
+            <input required type="text" name="cost-model" id="cost-model">
+          </div>
+          <div class="form-input">
+            <label>Cost (by 1 kg of cargo)</label>
+            <input required type="number" name="cost-cargo" id="cost-cargo">
+          </div>
+          <div class="form-input">
+            <label>Cost (by 1 km of distance)</label>
+            <input required type="number" name="cost-distance" id="cost-distance">
+          </div>
+          <div class="form-input">
+            <button type="submit">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="flex-wrapper">
+    <div class="flex-item">
+      <div class="list-wrapper">
+        <h2>Transports</h2>
+        <ul id="vehicle-list"></ul>
+      </div>
+    </div>
+    <div class="flex-item">
+      <div class="list-wrapper">
+        <h2>Costs</h2>
+        <ul id="cost-list"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
