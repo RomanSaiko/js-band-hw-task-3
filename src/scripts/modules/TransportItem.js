@@ -1,10 +1,10 @@
 export default class TransportItem {
-    constructor(id, model, producedYear, capacity, averageSpeed) {
-        this._id = id;
-        this._model = model;
-        this._producedYear = producedYear;
-        this._capacity = capacity;
-        this._averageSpeed = averageSpeed;
+    constructor(props) {
+        this._id = props.id;
+        this._model = props.model;
+        this._producedYear = props.producedYear;
+        this._capacity = props.capacity;
+        this._averageSpeed = props.averageSpeed;
     }
 
     get showCapacityInPounds() {

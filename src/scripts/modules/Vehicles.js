@@ -1,78 +1,74 @@
-import Truck from './Truck.js';
-import Ship from './Ship.js';
+import LocalStorage from './localStorage';
+import TransportFactory from './TransportFactory';
 
 export default class Vehicles {
     constructor() {
-        const createTruck = document.getElementById('create-truck');
-        const createShip = document.getElementById('create-ship');
-        createTruck.addEventListener('submit', this.addTruck.bind(this));
-        createShip.addEventListener('submit', this.addShip.bind(this));
+        const createVehicle = {
+            createTruck : document.getElementById('create-truck'),
+            createShip : document.getElementById('create-ship')
+        };
+        for (const key in createVehicle) {
+            createVehicle[key].addEventListener('submit', this.addVehicle.bind(this));
+        }
         this.transportList = document.getElementById('vehicle-list');
         this.render();
     }
 
-    addTruck(e) {
+    addVehicle(e) {
         e.preventDefault();
-        const id = document.getElementById('truck-id').value;
-        const model = document.getElementById('truck-model').value;
-        const licensePlate = document.getElementById('license-plate').value;
-        const producedYear = document.getElementById('truck-produced-year').value;
-        const capacity = document.getElementById('truck-capacity').value;
-        const averageSpeed = document.getElementById('truck-average-speed').value;
-        const typeOfGas = document.getElementById('gas-type').value;
-
-        let truckItem = new Truck(id, model, producedYear, capacity, averageSpeed, licensePlate, typeOfGas);
-
-        const truckListItem = document.createElement('li');
-        truckListItem.innerHTML = `
-        <p>id - ${truckItem._id}</p>
-        <p>Model - ${truckItem._model}</p>
-        <p>License plate - ${truckItem._licensePlate}</p>
-        <p>Produced year - ${truckItem._producedYear}</p>
-        <p>Capacity - ${truckItem.showCapacityInPounds}</p>
-        <p>Average speed - ${truckItem.showAverageSpeed}</p>
-        <p>Type of gas - ${truckItem._typeOfGas}</p> 
-        `;
-
-        this.transportList.appendChild(truckListItem);
-
-        localStorage.setItem('transports', JSON.stringify(this.transportList.innerHTML));
-    }
-
-    addShip(e) {
-        e.preventDefault();
-        const id = document.getElementById('ship-id').value;
-        const model = document.getElementById('ship-model').value;
-        const name = document.getElementById('ship-name').value;
-        const producedYear = document.getElementById('ship-produced-year').value;
-        const capacity = document.getElementById('ship-capacity').value;
-        const averageSpeed = document.getElementById('ship-average-speed').value;
-        const countOfTeam = document.getElementById('team-count').value;
-
-        const shipItem = new Ship(id, model, name, producedYear, capacity, averageSpeed, countOfTeam);
-
-        const shipListItem = document.createElement('li');
-        shipListItem.innerHTML = `
-        <p>id - ${shipItem._id}</p>
-        <p>Model - ${shipItem._model}</p>
-        <p>Serial number/Name - ${shipItem._name}</p> 
-        <p>Produced year - ${shipItem._producedYear}</p> 
-        <p>Capacity - ${shipItem.showCapacityInPounds}</p> 
-        <p>Average speed - ${shipItem.showAverageSpeed}</p> 
-        <p>Count of Team - ${shipItem._countOfTeam}</p> 
-        `;
-
-        this.transportList.appendChild(shipListItem);
-
-        localStorage.setItem('transports', JSON.stringify(this.transportList.innerHTML));
-    }
+        let vehicleForm = e.target.id;
+        let setList;
+        if (vehicleForm === 'create-truck') {
+            const truckProperties = {
+                id: document.getElementById('truck-id').value,
+                model: document.getElementById('truck-model').value,
+                licensePlate: document.getElementById('license-plate').value,
+                producedYear: document.getElementById('truck-produced-year').value,
+                capacity: document.getElementById('truck-capacity').value,
+                averageSpeed: document.getElementById('truck-average-speed').value,
+                typeOfGas: document.getElementById('gas-type').value
+            };
+            const truckItem = new TransportFactory('truck', truckProperties);
+            const truckListItem = document.createElement('li');
+            truckListItem.innerHTML = `
+            <p>id - ${truckItem._id}</p>
+            <p>Model - ${truckItem._model}</p>
+            <p>License plate - ${truckItem._licensePlate}</p>
+            <p>Produced year - ${truckItem._producedYear}</p>
+            <p>Capacity - ${truckItem.showCapacityInPounds}</p>
+            <p>Average speed - ${truckItem.showAverageSpeed}</p>
+            <p>Type of gas - ${truckItem._typeOfGas}</p> 
+            `;
+            this.transportList.appendChild(truckListItem);
+            setList = this.transportList.innerHTML;
+        } else {
+            const shipProperties = {
+                id: document.getElementById('ship-id').value,
+                model: document.getElementById('ship-model').value,
+                name: document.getElementById('ship-name').value,
+                producedYear: document.getElementById('ship-produced-year').value,
+                capacity: document.getElementById('ship-capacity').value,
+                averageSpeed: document.getElementById('ship-average-speed').value,
+                countOfTeam: document.getElementById('team-count').value
+            };
+            const shipItem = new TransportFactory('ship', shipProperties);
+            const shipListItem = document.createElement('li');
+            shipListItem.innerHTML = `
+            <p>id - ${shipItem._id}</p>
+            <p>Model - ${shipItem._model}</p>
+            <p>Serial number/Name - ${shipItem._name}</p> 
+            <p>Produced year - ${shipItem._producedYear}</p> 
+            <p>Capacity - ${shipItem.showCapacityInPounds}</p> 
+            <p>Average speed - ${shipItem.showAverageSpeed}</p> 
+            <p>Count of Team - ${shipItem._countOfTeam}</p> 
+            `;
+            this.transportList.appendChild(shipListItem);
+            setList = this.transportList.innerHTML;
+        }
+        LocalStorage.setLocalStorageData(setList);
+    };
 
     render() {
-        if (localStorage.getItem('transports') === null) {
-            this.transportList.innerHTML = '';
-        } else {
-            const refreshedTransportList = localStorage.getItem('transports');
-            this.transportList.innerHTML =  JSON.parse(refreshedTransportList);
-        }
+        this.transportList.innerHTML = LocalStorage.getLocalStorageData();
     }
 }

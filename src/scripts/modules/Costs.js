@@ -17,8 +17,6 @@ export default class Costs {
             costDistance
         };
 
-        console.log(costItem);
-
         const costListItem = document.createElement('li');
         costListItem.innerHTML = `
         <p>Model: ${costItem.costModel}</p> 
