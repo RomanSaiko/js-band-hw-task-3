@@ -1,5 +1,10 @@
 ### Demo
-https://romansaiko.github.io/js-band-hw-task-1/
+https://romansaiko.github.io/js-band-hw-task-3/
+
+Homework task1 update contains:
+* Updated existing functionality by using Factory Method;
+* Implemented service for the local storage by using Singleton Method;
+* Functionality works as before;
 
 ### Installation
 ```
@@ -15,6 +20,3 @@ npm start
 ```
 npm run build
 ```
-
-Used this lightweight webpack based template:
-https://github.com/wbkd/webpack-starter
